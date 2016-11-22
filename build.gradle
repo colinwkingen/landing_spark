@@ -18,3 +18,16 @@ dependencies {
 
 defaultTasks = ['clean']
 task stage(dependsOn: ['clean', 'installApp'])
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "pl.allegro.tech.build:newrelic-gradle-plugin:0.2.0"
+  }
+}
+
+apply plugin: "pl.allegro.tech.build.newrelic-gradle-plugin"
