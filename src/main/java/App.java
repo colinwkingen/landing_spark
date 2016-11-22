@@ -10,16 +10,34 @@ public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
 
+    String layout = "templates/layout.vtl";
+
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
-      return new ModelAndView(model, "templates/layout.vtl");
+      return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("/about", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/about.vtl");
-      return new ModelAndView(model, "templates/layout.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/form", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/add_comment", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String comment = request.queryParams("comment");
+      String sender = request.queryParams("sender");
+      model.put("comment", comment);
+      model.put("sender", sender);
+      model.put("template", "templates/add_comment.vtl");
+      return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
 }
