@@ -1,1 +1,1 @@
-web: ./build/install/todo/bin/landing_spark
+web: ./build/install/landing_spark/bin/landing_spark
